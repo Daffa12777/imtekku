@@ -833,32 +833,29 @@
         return changedKeys.length > 0;
     }
 
-    function ensureDataInitialized() {
-        if (hasInitialized) {
-            return;
-        }
+    async function ensureDataInitialized() {
+    if (hasInitialized) return;
 
+    setDefaultDataIfMissing();
+
+    const pullState = await pullCloudStateAsync(); // <-- ganti dari pullCloudStateSync()
+    if (pullState.ok && pullState.hasRemoteData) {
         setDefaultDataIfMissing();
-
-        const pullState = pullCloudStateSync();
-        if (pullState.ok && pullState.hasRemoteData) {
-            setDefaultDataIfMissing();
-        }
-
-        if (pullState.ok && !pullState.hasRemoteData) {
-            void pushCloudPayload(collectLocalCloudPayload());
-        }
-
-        if (normalizeLegacyDataLabels()) {
-            void pushCloudPayload(collectLocalCloudPayload());
-        }
-
-        hasInitialized = true;
-        lastCloudSyncAt = Date.now();
-        void requestPersistentStorageOnce();
-        void optimizeStorageUsageOnce();
-        startAutoCloudSync();
     }
+    if (pullState.ok && !pullState.hasRemoteData) {
+        void pushCloudPayload(collectLocalCloudPayload());
+    }
+
+    if (normalizeLegacyDataLabels()) {
+        void pushCloudPayload(collectLocalCloudPayload());
+    }
+
+    hasInitialized = true;
+    lastCloudSyncAt = Date.now();
+    void requestPersistentStorageOnce();
+    void optimizeStorageUsageOnce();
+    startAutoCloudSync();
+}
 
     function getJson(key, fallbackValue) {
         try {
@@ -1309,6 +1306,8 @@
         resizeImage
     });
 
+    window.ImtekkuStore.waitUntilReady().then(() => {
     ensureDataInitialized();
+});
 })();
 export default window.AppUtils;
