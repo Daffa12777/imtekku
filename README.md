@@ -69,8 +69,6 @@ To run the application on your local machine, follow these steps:
 ## 🔒 Administrative Access
 
 To access the admin dashboard, click the "ADMIN LOGIN" link located in the footer of the site.
-- **Default Username:** `IMTEKKUKNG`
-- **Default Password:** `azkaganteng25`
 
 *(Note: These credentials trigger the local `adminLoggedIn` state which grants access to the `/admin` route).*
 
