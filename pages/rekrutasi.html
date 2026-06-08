@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAREERS - IMTEKKU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/core/site.css">
+    <link rel="stylesheet" href="../assets/css/pages/rekrutasi-page.css">
+    <link rel="icon" type="image/png" href="../assets/img/LogoImtekku.png">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="../assets/img/LogoImtekku.png" alt="Logo IMTEKKU" class="logo-image">
+                <span>IMTEKKU</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="tim-inti.html">ORGANIZATIONAL CORE</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">DIVISION</a>
+                    <div class="dropdown-content">
+                        <a href="divisi.html#acara">EVENTS</a>
+                        <a href="divisi.html#humas">PUBLIC RELATIONS</a>
+                        <a href="divisi.html#sponsor">SPONSORSHIP</a>
+                        <a href="divisi.html#logistik">LOGISTICS</a>
+                        <a href="divisi.html#psdm">HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</a>
+                        <a href="divisi.html#medfo">MEDIA & INFORMATION</a>
+                    </div>
+                </li>
+                <li><a href="galeri.html">DOCUMENTS</a></li>
+                <li><a href="rekrutasi.html" class="btn-rekrutasi active">CAREERS</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-header" style="height: 40vh; background: linear-gradient(rgba(0, 31, 63, 0.85), rgba(0, 31, 63, 0.85)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; margin-top: 80px; border-bottom: 3px solid var(--corp-gold);">
+        <div class="header-content" style="text-align: center;">
+            <p style="color: var(--corp-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem;">Career Opportunities</p>
+            <h1 style="font-size: clamp(2rem, 10vw, 4rem); margin-bottom: 1rem; color: #ffffff;">JOIN OUR TEAM</h1>
+            <p style="font-size: 1.1rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;">Seeking exceptional talent to drive organizational excellence and professional innovation.</p>
+        </div>
+    </section>
+
+    <section class="registration-section">
+        <div class="container">
+            <div class="registration-content">
+                <div class="registration-info">
+                    <p class="section-kicker">Acquisition</p>
+                    <h2>PROFESSIONAL INTAKE</h2>
+                    <p class="info-text">
+                        We are identifying individuals with high integrity, creative potential, and leadership capabilities to join our institutional framework.
+                    </p>
+                    <div class="benefit-list">
+                        <div class="benefit-item">
+                            <span class="benefit-icon">01</span>
+                            <span>Executive Leadership Training</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">02</span>
+                            <span>Institutional Networking</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">03</span>
+                            <span>Strategic Project Management</span>
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-icon">04</span>
+                            <span>Performance Certifications</span>
+                        </div>
+                    </div>
+                    <div class="timeline-info">
+                        <h3>RECRUITMENT TIMELINE</h3>
+                        <ul id="recruitmentTimelineList">
+                            <li><span>PHASE 1</span> APPLICATION WINDOW: JANUARY 2026</li>
+                            <li><span>PHASE 2</span> ADMINISTRATIVE SCREENING: FEBRUARY 2026</li>
+                            <li><span>PHASE 3</span> PROFESSIONAL INTERVIEW: FEBRUARY 2026</li>
+                            <li><span>PHASE 4</span> OFFICIAL ONBOARDING: MARCH 2026</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="registration-form-container">
+                    <form id="registrationForm" class="registration-form">
+                        <h3>OFFICIAL APPLICATION</h3>
+                        
+                        <div class="form-group">
+                            <label for="fullName">FULL LEGAL NAME</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nim">STUDENT ID (NIM)</label>
+                                <input type="text" id="nim" name="nim" placeholder="ID number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="semester">ACADEMIC SEMESTER</label>
+                                <select id="semester" name="semester" required>
+                                    <option value="">Select...</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">CORPORATE EMAIL</label>
+                            <input type="email" id="email" name="email" placeholder="email@address.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">CONTACT NUMBER</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+62..." required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="divisi">TARGET DIVISION (CHOICE 1)</label>
+                                <select id="divisi" name="divisi" required>
+                                    <option value="">Select department...</option>
+                                    <option value="acara">EVENTS</option>
+                                    <option value="humas">PUBLIC RELATIONS</option>
+                                    <option value="sponsor">SPONSORSHIP</option>
+                                    <option value="logistik">LOGISTICS</option>
+                                    <option value="psdm">HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</option>
+                                    <option value="medfo">MEDIA & INFORMATION</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="divisi2">TARGET DIVISION (CHOICE 2)</label>
+                                <select id="divisi2" name="divisi2">
+                                    <option value="-">Optional...</option>
+                                    <option value="acara">EVENTS</option>
+                                    <option value="humas">PUBLIC RELATIONS</option>
+                                    <option value="sponsor">SPONSORSHIP</option>
+                                    <option value="logistik">LOGISTICS</option>
+                                    <option value="psdm">HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</option>
+                                    <option value="medfo">MEDIA & INFORMATION</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">SKILLS & EXPERTISE</label>
+                            <input type="text" id="skills" name="skills" placeholder="e.g. Photoshop, Public Speaking, MS Excel">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">ORGANIZATIONAL EXPERIENCE</label>
+                            <textarea id="experience" name="experience" rows="3" placeholder="Briefly describe your previous organizational roles..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="motivation">PROFESSIONAL STATEMENT / MOTIVATION</label>
+                            <textarea id="motivation" name="motivation" rows="4" required placeholder="Outline your objectives and value proposition..."></textarea>
+                        </div>
+
+                        <div class="form-row" id="fixedRequirementsRow">
+                            <div class="form-group" id="cvFieldGroup">
+                                <label for="cvFile" id="cvLabel">UPLOAD CV (PDF/DOC)*</label>
+                                <input type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" required>
+                                <small id="cvHelper" style="font-size: 0.75rem; color: var(--corp-muted);">Format: PDF, DOC, DOCX</small>
+                            </div>
+                            <div class="form-group" id="portfolioFieldGroup">
+                                <label for="portfolioFile" id="portfolioLabel">UPLOAD PORTFOLIO (PDF/ZIP)</label>
+                                <input type="file" id="portfolioFile" name="portfolioFile" accept=".pdf,.zip,.rar,.ppt,.pptx">
+                                <small id="portfolioHelper" style="font-size: 0.75rem; color: var(--corp-muted);">Optional for creative roles.</small>
+                            </div>
+                        </div>
+
+                        <div id="dynamicRecruitmentRequirements" class="dynamic-requirements-list">
+                            <!-- Additional requirements if configured from Admin -->
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="agreement" name="agreement" required>
+                                <span>I confirm the accuracy of this data and agree to organizational protocols.</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            SUBMIT APPLICATION
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content small">
+            <span class="close-modal" onclick="closeAdminLogin()">&times;</span>
+            <div class="login-form-container">
+                <h2>INSTITUTIONAL ACCESS</h2>
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">ADMINISTRATOR ID</label>
+                        <input type="text" id="adminUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">ACCESS KEY</label>
+                        <input type="password" id="adminPassword" required>
+                    </div>
+                    <button type="submit" class="submit-btn">AUTHORIZE LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content small">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div class="success-container">
+                <div class="success-icon">✓</div>
+                <h2>APPLICATION RECEIVED</h2>
+                <p>Your data has been securely logged. Our HR department will contact you shortly.</p>
+                <button class="btn-primary" onclick="closeSuccessModal()" style="background: var(--corp-navy); color: #ffffff; border: none; padding: 1rem 2rem; font-weight: 700; cursor: pointer; border-radius: 4px; width: 100%; margin-top: 1.5rem;">ACKNOWLEDGE</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">IMTEK<span>KU</span></div>
+                    <p>IKATAN MAHASISWA TELKOM UNIVERSITY KUNINGAN</p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--corp-gold);">FOUNDED 2026</p>
+                </div>
+                <div class="footer-col">
+                    <h4>DIRECTORY</h4>
+                    <ul>
+                        <li><a href="../index.html">HOME</a></li>
+                        <li><a href="tim-inti.html">ORGANIZATIONAL CORE</a></li>
+                        <li><a href="divisi.html">DIVISION</a></li>
+                        <li><a href="galeri.html">DOCUMENTS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>DIVISION</h4>
+                    <ul>
+                        <li><a href="divisi.html#acara">EVENTS</a></li>
+                        <li><a href="divisi.html#humas">PUBLIC RELATIONS</a></li>
+                        <li><a href="divisi.html#sponsor">SPONSORSHIP</a></li>
+                        <li><a href="divisi.html#logistik">LOGISTICS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>CONTACT</h4>
+                    <ul>
+                        <li>EMAIL: IMTEKKU25@GMAIL.COM</li>
+                        <li>LOCATION: Jl. Telekomunikasi No.1, Sukapura, Kec. Dayeuhkolot, Kabupaten Bandung, Jawa Barat 40257</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 IMTEKKU. ALL RIGHTS RESERVED. EXCELLENCE IN GOVERNANCE. <span onclick="showAdminLogin()" style="cursor: pointer; opacity: 0.05; font-size: 0.2rem;">.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/core/app-utils.js"></script>
+    <script src="../assets/js/core/site.js"></script>
+    <script src="../assets/js/pages/rekrutasi-page.js"></script>
+</body>
+</html>
+
+

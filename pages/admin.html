@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANAGEMENT - IMTEKKU</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/core/site.css">
+    <link rel="stylesheet" href="../assets/css/pages/admin-page.css">
+    <link rel="icon" type="image/png" href="../assets/img/LogoImtekku.png">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="../assets/img/LogoImtekku.png" alt="Logo IMTEKKU" class="logo-image">
+                <span>IMTEKKU MANAGEMENT</span>
+            </div>
+            <div class="admin-info">
+                <span class="admin-name">ADMINISTRATOR</span>
+                <button class="logout-btn" onclick="logout()">LOGOUT</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="dashboard-header">
+        <div class="container">
+            <h1>INSTITUTIONAL DASHBOARD</h1>
+            <p>Real-time oversight of professional applications and organizational data.</p>
+        </div>
+    </section>
+
+    <div class="admin-tabs">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="applicants">RECRUITMENT DATA</button>
+            <button class="tab-btn" data-tab="media">MEMBER MANAGEMENT</button>
+            <button class="tab-btn" data-tab="gallery">GALLERY MANAGEMENT</button>
+            <button class="tab-btn" data-tab="archived">ARCHIVED COLLECTIONS</button>
+            <button class="tab-btn" data-tab="settings">SITE SETTINGS</button>
+        </div>
+    </div>
+
+    <div id="applicantsTab" class="tab-content active">
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3 id="totalApplicants">0</h3>
+                            <p>TOTAL APPLICANTS</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">EV</div>
+                        <div class="stat-info">
+                            <h3 id="acaraCount">0</h3>
+                            <p>EVENTS</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">PR</div>
+                        <div class="stat-info">
+                            <h3 id="humasCount">0</h3>
+                            <p>PUBLIC RELATIONS</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">SP</div>
+                        <div class="stat-info">
+                            <h3 id="sponsorCount">0</h3>
+                            <p>SPONSORSHIP</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">LG</div>
+                        <div class="stat-info">
+                            <h3 id="logistikCount">0</h3>
+                            <p>LOGISTICS</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">HR</div>
+                        <div class="stat-info">
+                            <h3 id="psdmCount">0</h3>
+                            <p>HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">MI</div>
+                        <div class="stat-info">
+                            <h3 id="medfoCount">0</h3>
+                            <p>MEDIA & INFORMATION</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="control-section">
+            <div class="container">
+                <div class="control-bar">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search by name, ID, or professional credentials...">
+                    </div>
+                    <div class="filter-box">
+                        <select id="divisionFilter">
+                            <option value="all">ALL DIVISIONS</option>
+                            <option value="acara">EVENTS</option>
+                            <option value="humas">PUBLIC RELATIONS</option>
+                            <option value="sponsor">SPONSORSHIP</option>
+                            <option value="logistik">LOGISTICS</option>
+                            <option value="psdm">HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</option>
+                            <option value="medfo">MEDIA & INFORMATION</option>
+                        </select>
+                    </div>
+                    <button class="export-btn" onclick="exportToExcel()">
+                        <span>📥</span> EXPORT DATA
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <div class="container">
+                <div class="table-container">
+                    <table id="applicantsTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>STUDENT ID</th>
+                                <th>SEMESTER</th>
+                                <th>EMAIL</th>
+                                <th>PHONE</th>
+                                <th>DIVISION 1</th>
+                                <th>DIVISION 2</th>
+                                <th>SUBMISSION DATE</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                    <div id="emptyState" class="empty-state" style="padding: 5rem; text-align: center; color: var(--corp-muted);">
+                        <div class="empty-icon" style="font-size: 3rem; margin-bottom: 1rem;">📂</div>
+                        <h3>NO RECORDS FOUND</h3>
+                        <p>Applicant data will appear here once submissions are received.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="mediaTab" class="tab-content">
+        <section class="photo-management-section">
+            <div class="container">
+                <div class="management-grid">
+                    <div class="management-card">
+                        <h2>ORGANIZATIONAL CORE</h2>
+                        <div class="team-member-form">
+                            <label>ADD ORGANIZATIONAL CORE MEMBER</label>
+                            <div class="team-member-grid">
+                                <input type="text" id="newTeamMemberName" placeholder="Full Name">
+                                <input type="text" id="newTeamMemberRole" placeholder="Position / Role">
+                                <input type="text" id="newTeamMemberNim" placeholder="Student ID (NIM)">
+                                <input type="text" id="newTeamMemberMajor" placeholder="Major / Jurusan">
+                                <input type="text" id="newTeamMemberInstagram" placeholder="Instagram (without @)">
+                                <div class="file-upload-wrapper" style="grid-column: 1 / -1;">
+                                    <label class="export-btn" style="width: 100%; justify-content: center; background: #f0f0f0; color: #333; border: 1px dashed #ccc; cursor: pointer;">
+                                        📷 UPLOAD PHOTO
+                                        <input type="file" id="newTeamMemberPhoto" class="hidden-input" accept="image/*">
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="button" id="addTeamMemberBtn" class="export-btn team-member-btn">ADD MEMBER</button>
+                        </div>
+                        <div class="member-list" id="teamMemberList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div class="management-card">
+                        <h2>DIVISION</h2>
+                        <div class="form-group" style="margin-bottom: 2rem;">
+                            <label>SELECT DIVISION</label>
+                            <select id="divisionPhotoFilter" style="width: 100%; padding: 1rem; margin-top: 0.5rem;">
+                                <option value="acara">EVENTS</option>
+                                <option value="humas">PUBLIC RELATIONS</option>
+                                <option value="sponsor">SPONSORSHIP</option>
+                                <option value="logistik">LOGISTICS</option>
+                                <option value="psdm">HR DEVELOPMENT (STUDENT/HUMAN RESOURCES)</option>
+                                <option value="medfo">MEDIA & INFORMATION</option>
+                            </select>
+                        </div>
+                        <div class="division-staff-form">
+                            <label>ADD STAFF TO SELECTED DIVISION</label>
+                            <div class="division-staff-grid">
+                                <input type="text" id="newDivisionStaffName" placeholder="Full Name">
+                                <input type="text" id="newDivisionStaffNim" placeholder="Student ID (NIM)">
+                                <input type="text" id="newDivisionStaffMajor" placeholder="Major / Jurusan">
+                                <input type="text" id="newDivisionStaffInstagram" placeholder="Instagram (without @)">
+                                <div class="file-upload-wrapper" style="grid-column: 1 / -1;">
+                                    <label class="export-btn" style="width: 100%; justify-content: center; background: #f0f0f0; color: #333; border: 1px dashed #ccc; cursor: pointer;">
+                                        📷 UPLOAD PHOTO
+                                        <input type="file" id="newDivisionStaffPhoto" class="hidden-input" accept="image/*">
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="button" id="addDivisionStaffBtn" class="export-btn division-staff-btn">ADD STAFF</button>
+                            <p id="divisionStaffLimitNote" class="division-staff-limit-note">Loading division limit...</p>
+                        </div>
+                        <div class="member-list" id="divisionMemberList">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="galleryTab" class="tab-content">
+        <section class="photo-management-section">
+            <div class="container">
+                <div class="management-grid">
+                    <!-- Gallery Categories Sidebar -->
+                    <div class="management-card">
+                        <h2>DOCUMENTATION SECTIONS</h2>
+                        <div class="category-add-wrap">
+                            <div class="form-group">
+                                <label>ADD NEW SECTION</label>
+                                <div class="category-add-row">
+                                    <input type="text" id="newCategoryName" class="category-add-input" placeholder="Section Name (e.g. SEMINAR)">
+                                    <button class="export-btn category-add-btn" onclick="window.addGalleryCategory()">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="categoryAdminList" class="member-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Photo Upload Area -->
+                    <div class="management-card">
+                        <div class="gallery-toolbar">
+                            <h2>PHOTO MANAGEMENT</h2>
+                            <div class="gallery-toolbar-actions">
+                                <select id="galleryCategoryFilter" class="gallery-category-select">
+                                    <!-- Populated by JS -->
+                                </select>
+                                <label class="export-btn gallery-upload-btn">
+                                    UPLOAD PHOTOS
+                                    <input type="file" id="galleryUploadInput" class="hidden-input" accept="image/*" multiple>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="galleryAdminList" class="gallery-admin-grid">
+                            <!-- Gallery items populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="archivedTab" class="tab-content">
+        <section class="photo-management-section">
+            <div class="container">
+                <div class="management-grid">
+                    <div class="management-card">
+                        <h2>ARCHIVED COLLECTIONS</h2>
+                        <div style="margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label>ADD NEW RECORD</label>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                                    <input type="text" id="newArchivedTitle" placeholder="Record Title (e.g. SEMINAR X)" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                                    <input type="text" id="newArchivedTag" placeholder="Tag (e.g. ROADSHOW)" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                                    <input type="text" id="newArchivedDate" placeholder="Date (e.g. JAN 2026)" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;">
+                                    <textarea id="newArchivedDesc" placeholder="Brief Description..." style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                                    <label class="export-btn" style="cursor: pointer; justify-content: center; background: #eee; color: #333; border: 1px dashed #ccc;">
+                                        📷 UPLOAD COVER PHOTO
+                                        <input type="file" id="newArchivedPhoto" class="hidden-input" accept="image/*">
+                                    </label>
+                                    <button type="button" id="addArchivedRecordBtn" class="export-btn" onclick="window.addArchivedRecord()" style="padding: 0.8rem; justify-content: center;">ADD TO ARCHIVE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="archivedAdminList" class="member-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SITE SETTINGS TAB -->
+    <div id="settingsTab" class="tab-content">
+        <section class="photo-management-section">
+            <div class="container">
+                <div class="management-card" style="max-width: 920px; margin: 0 auto;">
+                    <h2>HOME PAGE SETTINGS</h2>
+                    <p style="color: var(--corp-muted); margin-bottom: 2rem;">Manage key visual elements of the landing page.</p>
+                    
+                    <div class="form-group">
+                        <label>IMTEKKU FAMILY IMAGE</label>
+                        <div id="homeFamilyPreview" style="width: 100%; aspect-ratio: 16/9; border: 1px solid #ddd; border-radius: 8px; margin: 1rem 0; overflow: hidden; background: #eee;">
+                            <!-- Preview populated by JS -->
+                        </div>
+                        <label class="export-btn" style="cursor: pointer; justify-content: center;">
+                            📷 CHANGE FAMILY IMAGE
+                            <input type="file" id="homeFamilyUpload" class="hidden-input" accept="image/*">
+                        </label>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2.5rem;">
+                        <label>LATEST ACTIVITIES SECTION</label>
+                        <p id="homeGalleryVisibilityStatus" style="margin: 0.75rem 0 1rem; color: var(--corp-muted);">
+                            Status loading...
+                        </p>
+                        <button type="button" id="homeGalleryToggleBtn" class="export-btn" style="width: 100%; justify-content: center;">
+                            TOGGLE SECTION
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2.5rem;">
+                        <label>CAREERS ACCESS MODE</label>
+                        <p id="careersAccessStatus" style="margin: 0.75rem 0 1rem; color: var(--corp-muted);">
+                            Status loading...
+                        </p>
+                        <button type="button" id="careersAccessToggleBtn" class="export-btn" style="width: 100%; justify-content: center;">
+                            TOGGLE CAREERS ACCESS
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2.5rem;">
+                        <label>RECRUITMENT TIMELINE (CAREERS PAGE)</label>
+                        <p style="margin: 0.75rem 0 1rem; color: var(--corp-muted);">
+                            Update phase label, activity, and date shown in Recruitment Timeline.
+                        </p>
+                        <div class="timeline-editor-grid">
+                            <div class="timeline-row">
+                                <input type="text" id="timelinePhase1" placeholder="PHASE 1">
+                                <input type="text" id="timelineTitle1" placeholder="APPLICATION WINDOW">
+                                <input type="text" id="timelineDate1" placeholder="JANUARY 2026">
+                            </div>
+                            <div class="timeline-row">
+                                <input type="text" id="timelinePhase2" placeholder="PHASE 2">
+                                <input type="text" id="timelineTitle2" placeholder="ADMINISTRATIVE SCREENING">
+                                <input type="text" id="timelineDate2" placeholder="FEBRUARY 2026">
+                            </div>
+                            <div class="timeline-row">
+                                <input type="text" id="timelinePhase3" placeholder="PHASE 3">
+                                <input type="text" id="timelineTitle3" placeholder="PROFESSIONAL INTERVIEW">
+                                <input type="text" id="timelineDate3" placeholder="FEBRUARY 2026">
+                            </div>
+                            <div class="timeline-row">
+                                <input type="text" id="timelinePhase4" placeholder="PHASE 4">
+                                <input type="text" id="timelineTitle4" placeholder="OFFICIAL ONBOARDING">
+                                <input type="text" id="timelineDate4" placeholder="MARCH 2026">
+                            </div>
+                        </div>
+                        <button type="button" id="saveRecruitmentTimelineBtn" class="export-btn" style="width: 100%; justify-content: center; margin-top: 1rem;">
+                            SAVE RECRUITMENT TIMELINE
+                        </button>
+                    </div>
+
+                    <div class="form-group requirements-editor-section" style="margin-top: 2.5rem;">
+                        <label>RECRUITMENT REQUIREMENTS (CAREERS PAGE)</label>
+                        <p style="margin: 0.75rem 0 1rem; color: var(--corp-muted);">
+                            Add or remove requirement fields shown in application form (example: Upload CV, Upload Portfolio, etc.).
+                        </p>
+                        <div class="requirements-builder-grid">
+                            <input type="text" id="requirementLabelInput" placeholder="Requirement label (example: Upload CV)">
+                            <select id="requirementTypeInput">
+                                <option value="file">FILE UPLOAD</option>
+                                <option value="text">SHORT TEXT</option>
+                                <option value="textarea">PARAGRAPH</option>
+                            </select>
+                            <input type="text" id="requirementAcceptInput" placeholder="Allowed file type: .pdf,.doc,.docx">
+                            <label class="requirements-required-toggle">
+                                <input type="checkbox" id="requirementRequiredInput" checked>
+                                REQUIRED FIELD
+                            </label>
+                        </div>
+                        <button type="button" id="addRecruitmentRequirementBtn" class="export-btn requirements-add-btn">
+                            ADD REQUIREMENT
+                        </button>
+                        <div id="recruitmentRequirementsAdminList" class="requirements-admin-list">
+                            <!-- Requirement list rendered by JS -->
+                        </div>
+                        <button type="button" id="saveRecruitmentRequirementsBtn" class="export-btn requirements-save-btn">
+                            SAVE REQUIREMENTS
+                        </button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 5rem; padding-top: 2rem; border-top: 2px dashed #eee;">
+                        <label style="color: #ff4444;">SYSTEM MAINTENANCE</label>
+                        <p style="margin: 0.75rem 0 1rem; color: var(--corp-muted); font-size: 0.85rem;">
+                            Jika memori browser penuh (QuotaExceededError), gunakan tombol di bawah untuk mengosongkan database. 
+                            <strong>PERINGATAN: Semua data (pendaftar, foto, galeri) akan dihapus secara permanen dari browser dan cloud.</strong>
+                        </p>
+                        <button type="button" onclick="window.resetDatabase()" class="export-btn" style="width: 100%; justify-content: center; background: #ff4444; border-color: #ff4444;">
+                            ⚠️ RESET ALL DATABASE & CLEAR MEMORY
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- NEW: DEDICATED EDIT PAGE VIEW -->
+    <div id="editMemberView" class="tab-content" style="background: #fdfdfd; min-height: 100vh;">
+        <section class="container edit-member-container">
+            <div class="edit-member-topbar">
+                <button onclick="window.switchTab('media')" class="logout-btn edit-member-back-btn">← BACK TO LIST</button>
+                <h1 class="edit-member-title">PROFILE EDITOR</h1>
+            </div>
+
+            <div class="management-card edit-member-card">
+                <form id="editMemberForm">
+                    <input type="hidden" id="editMemberId">
+                    <input type="hidden" id="editMemberType">
+                    
+                    <div class="edit-member-grid">
+                        <div class="edit-photo-section">
+                            <div class="member-admin-photo" style="width: 200px; height: 200px; border-radius: 8px; margin-bottom: 1rem; position: relative; overflow: hidden; border: 2px solid var(--corp-gold);">
+                                <div id="editPhotoPreview" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                    <!-- Preview Image -->
+                                </div>
+                            </div>
+                            <label class="export-btn" style="font-size: 0.8rem; width: 100%; justify-content: center; padding: 0.8rem;">
+                                📷 CHANGE PHOTO
+                                <input type="file" id="editMemberPhotoInput" class="hidden-input" accept="image/*">
+                            </label>
+                        </div>
+
+                        <div class="edit-fields-section">
+                            <div class="form-group" style="margin-bottom: 1.5rem;">
+                                <label style="font-weight: 800; font-size: 0.8rem;">FULL NAME</label>
+                                <input type="text" id="editMemberName" style="width: 100%; padding: 1rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 4px;" required>
+                            </div>
+                            
+                            <div class="edit-member-two-cols">
+                                <div class="form-group">
+                                    <label style="font-weight: 800; font-size: 0.8rem;">STUDENT ID (NIM)</label>
+                                    <input type="text" id="editMemberNim" style="width: 100%; padding: 1rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight: 800; font-size: 0.8rem;">INSTAGRAM (@)</label>
+                                    <input type="text" id="editMemberInstagram" style="width: 100%; padding: 1rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" style="margin-bottom: 2rem;">
+                                <label style="font-weight: 800; font-size: 0.8rem;">MAJOR / JURUSAN</label>
+                                <input type="text" id="editMemberMajor" style="width: 100%; padding: 1rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="zoom-control edit-member-zoom-control">
+                        <label style="font-weight: 800; font-size: 0.8rem;">PHOTO ZOOM / CROP ADJUSTMENT</label>
+                        <input type="range" id="editMemberZoom" min="100" max="250" step="1" value="100" style="width: 100%; margin: 1.5rem 0;">
+                        <div class="edit-member-zoom-labels">
+                            <span>100% (Original)</span>
+                            <span id="zoomValue" style="color: var(--corp-navy); font-weight: 700;">100%</span>
+                            <span>250% (Max Zoom)</span>
+                        </div>
+                    </div>
+
+                    <div class="edit-member-actions">
+                        <button type="submit" class="export-btn edit-member-save-btn">💾 SAVE PROFILE CHANGES</button>
+                        <button type="button" onclick="window.switchTab('media')" class="btn-delete edit-member-cancel-btn">CANCEL</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content admin-detail-modal">
+            <span class="close-modal" onclick="closeDetailModal()">&times;</span>
+            <div class="admin-detail-content">
+                <h2>APPLICANT DETAIL</h2>
+                <div class="admin-detail-grid">
+                    <div>
+                        <span class="detail-label">FULL NAME</span>
+                        <span class="detail-value" id="detailName">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">STUDENT ID</span>
+                        <span class="detail-value" id="detailNim">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">SEMESTER</span>
+                        <span class="detail-value" id="detailSemester">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">EMAIL</span>
+                        <span class="detail-value" id="detailEmail">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">PHONE</span>
+                        <span class="detail-value" id="detailPhone">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">DIVISION 1</span>
+                        <span class="detail-value" id="detailDivisi">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">DIVISION 2</span>
+                        <span class="detail-value" id="detailDivisi2">-</span>
+                    </div>
+                    <div>
+                        <span class="detail-label">SUBMISSION DATE</span>
+                        <span class="detail-value" id="detailDate">-</span>
+                    </div>
+                </div>
+
+                <div class="admin-detail-block">
+                    <span class="detail-label">PROFESSIONAL STATEMENT</span>
+                    <span class="detail-text" id="detailMotivation">-</span>
+                </div>
+
+                <div class="admin-detail-block">
+                    <span class="detail-label">SKILLS</span>
+                    <span class="detail-text" id="detailSkills">-</span>
+                </div>
+
+                <div class="admin-detail-block">
+                    <span class="detail-label">EXPERIENCE</span>
+                    <span class="detail-text" id="detailExperience">-</span>
+                </div>
+
+                <div class="admin-detail-block">
+                    <span class="detail-label">SUBMITTED REQUIREMENTS</span>
+                    <div id="detailRequirements" class="detail-requirements-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal">
+        <div class="modal-content small admin-confirm-modal">
+            <span class="close-modal" onclick="closeDeleteModal()">&times;</span>
+            <div class="admin-confirm-content">
+                <h2>DELETE APPLICANT DATA?</h2>
+                <p>Data yang dihapus tidak bisa dikembalikan lagi.</p>
+                <div class="admin-confirm-actions">
+                    <button type="button" class="btn-delete" onclick="confirmDelete()">DELETE</button>
+                    <button type="button" class="btn-detail" onclick="closeDeleteModal()">CANCEL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="appAlertModal" class="modal app-alert-modal">
+        <div class="modal-content small app-alert-content">
+            <button type="button" class="close-modal app-alert-close" onclick="closeAppAlert()" aria-label="Close notification">&times;</button>
+            <div class="app-alert-body">
+                <span class="app-alert-badge">IMTEKKU NOTICE</span>
+                <h3 id="appAlertTitle">NOTIFICATION</h3>
+                <p id="appAlertMessage">-</p>
+                <button type="button" id="appAlertOkBtn" class="export-btn app-alert-ok-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="appConfirmModal" class="modal app-alert-modal">
+        <div class="modal-content small app-alert-content app-confirm-content-shell">
+            <button type="button" class="close-modal app-alert-close" onclick="closeAppConfirm()" aria-label="Close confirmation">&times;</button>
+            <div class="app-alert-body app-confirm-body">
+                <span class="app-alert-badge">IMTEKKU CONFIRMATION</span>
+                <h3 id="appConfirmTitle">CONFIRM ACTION</h3>
+                <p id="appConfirmMessage">-</p>
+                <div class="app-confirm-actions">
+                    <button type="button" id="appConfirmCancelBtn" class="app-confirm-btn app-confirm-cancel-btn">CANCEL</button>
+                    <button type="button" id="appConfirmOkBtn" class="app-confirm-btn app-confirm-ok-btn">CONFIRM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/core/app-utils.js"></script>
+    <script src="../assets/js/core/site.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="../assets/js/pages/admin-page.js"></script>
+</body>
+</html>
