@@ -24,25 +24,26 @@ const Rekrutasi = () => {
     const formRef = useRef(null);
 
     const loadSettings = () => {
-        if (window.AppUtils) {
-            const homeSettings = window.AppUtils.getJson(window.AppUtils.DATA_KEYS?.homeSettings || 'imtekkuHomeSettings', {});
-            const openForPublic = homeSettings && homeSettings.careersOpen === true;
-            setIsCareersOpen(openForPublic);
-            
-            const adminActive = window.ImtekkuStore.getItem('adminLoggedIn') === 'true';
-            setCareersLockedForPublic(!openForPublic && !adminActive);
+    if (window.AppUtils) {
+        const homeSettings = window.AppUtils.getJson(window.AppUtils.DATA_KEYS?.homeSettings || 'imtekkuHomeSettings', {});
+        const openForPublic = homeSettings && homeSettings.careersOpen === true;
+        setIsCareersOpen(openForPublic);
 
-            const rawSettings = window.AppUtils.getJson(window.AppUtils.DATA_KEYS?.recruitmentSettings || 'imtekkuRecruitmentSettings', {});
-            
-            if (Array.isArray(rawSettings.timeline) && rawSettings.timeline.length > 0) {
-                setTimeline(rawSettings.timeline);
-            }
+        // FIX: kunci murni ngikut setting careersOpen.
+        // Sebelumnya di-bypass kalau admin login, makanya selalu keliatan kebuka.
+        setCareersLockedForPublic(!openForPublic);
 
-            if (Array.isArray(rawSettings.requirements)) {
-                setRequirements(rawSettings.requirements);
-            }
+        const rawSettings = window.AppUtils.getJson(window.AppUtils.DATA_KEYS?.recruitmentSettings || 'imtekkuRecruitmentSettings', {});
+
+        if (Array.isArray(rawSettings.timeline) && rawSettings.timeline.length > 0) {
+            setTimeline(rawSettings.timeline);
         }
-    };
+
+        if (Array.isArray(rawSettings.requirements)) {
+            setRequirements(rawSettings.requirements);
+        }
+    }
+};
 
     useEffect(() => {
         loadSettings();

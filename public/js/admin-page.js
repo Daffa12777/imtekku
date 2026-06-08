@@ -1737,28 +1737,32 @@
     }
 
     function renderApplicantsTable() {
-        if (!elements.tableBody || !elements.emptyState) return;
-        if (state.filteredApplicants.length === 0) { elements.tableBody.innerHTML = ''; elements.emptyState.classList.add('show'); return; }
-        elements.emptyState.classList.remove('show');
-        elements.tableBody.innerHTML = state.filteredApplicants.map((a, i) => `
-            <tr>
-                <td>${i + 1}</td>
-                <td>${a.fullName}</td>
-                <td>${a.nim}</td>
-                <td>${a.semester}</td>
-                <td>${a.email}</td>
-                <td>${a.phone}</td>
-                <td>${mapDivisionLabel(a.divisi)}</td>
-                <td>${a.divisi2 && a.divisi2 !== '-' ? mapDivisionLabel(a.divisi2) : '-'}</td>
-                <td>${a.registrationDate}</td>
-                <td>
-                    <div class="action-btns">
-                        <button class="btn-detail" onclick="showDetail(${a.id})">Detail</button>
-                        <button class="btn-delete" onclick="showDeleteModal(${a.id})">Hapus</button>
-                    </div>
-                </td>
-            </tr>`).join('');
+    if (!elements.tableBody || !elements.emptyState) return;
+    if (state.filteredApplicants.length === 0) {
+        elements.tableBody.innerHTML = '';
+        elements.emptyState.style.display = 'block';
+        return;
     }
+    elements.emptyState.style.display = 'none';
+    elements.tableBody.innerHTML = state.filteredApplicants.map((a, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td>${a.fullName}</td>
+            <td>${a.nim}</td>
+            <td>${a.semester}</td>
+            <td>${a.email}</td>
+            <td>${a.phone}</td>
+            <td>${mapDivisionLabel(a.divisi)}</td>
+            <td>${a.divisi2 && a.divisi2 !== '-' ? mapDivisionLabel(a.divisi2) : '-'}</td>
+            <td>${a.registrationDate}</td>
+            <td>
+                <div class="action-btns">
+                    <button class="btn-detail" onclick="showDetail(${a.id})">Detail</button>
+                    <button class="btn-delete" onclick="showDeleteModal(${a.id})">Hapus</button>
+                </div>
+            </td>
+        </tr>`).join('');
+}
 
     function showDetail(id) {
         const a = state.applicants.find(item => item.id === id);
