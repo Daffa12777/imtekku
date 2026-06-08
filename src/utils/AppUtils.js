@@ -1306,8 +1306,12 @@
         resizeImage
     });
 
-    window.ImtekkuStore.waitUntilReady().then(() => {
-    ensureDataInitialized();
-});
+    if (window.ImtekkuStore && typeof window.ImtekkuStore.waitUntilReady === 'function') {
+        window.ImtekkuStore.waitUntilReady().then(() => {
+            ensureDataInitialized();
+        });
+    } else {
+        ensureDataInitialized();
+    }
 })();
 export default window.AppUtils;
